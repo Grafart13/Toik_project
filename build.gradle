@@ -1,0 +1,90 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+configurations {
+        ajc
+        springAspects
+        ajInpath
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://maven.eveoh.nl/content/repositories/releases"
+        }
+    }
+
+    dependencies {
+        classpath "nl.eveoh:gradle-aspectj:1.5"
+    }
+}
+
+project.ext {
+    aspectjVersion = '1.8.4'
+}
+
+apply plugin: 'aspectj'
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'ReportingGradle',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+    	url "https://maven.atlassian.com/public"
+    }
+    
+}
+
+dependencies {
+ 	    ajc 'org.aspectj:aspectjtools:1.7.2'
+        springAspects 'org.springframework:spring-aspects:3.0.5.RELEASE'
+        compile "org.aspectj:aspectjrt:1.7.2"
+        compile "javax.persistence:persistence-api:1.0"
+        
+	compile (
+		[group: 'commons-collections', name: 'commons-collections', version: '3.2'],
+		[group: 'com.sun.jersey', name: 'jersey-json', version: '1.5'],
+		[group: 'com.sun.jersey', name: 'jersey-client', version: '1.9'],
+		[group: 'com.google.guava', name: 'guava', version: '14.0-rc1'],
+		[group: 'org.codehaus.jettison', name: 'jettison', version: '1.0.1'],
+		[group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.4'],
+		[group: 'commons-io', name: 'commons-io', version: '2.4'],
+		[group: 'com.atlassian.jira', name: 'jira-rest-java-client-api', version: '2.0.0-m19'],
+		[group: 'com.atlassian.jira', name: 'jira-rest-java-client-core', version: '2.0.0-m19'],
+		[group: 'org.springframework', name: 'spring-tx', version: '3.2.3.RELEASE']
+	)
+	
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+compileAspect {
+	xlint= 'warning'
+	maxmem = '1024m'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+task hello {
+	doLast {
+		println 'Hello'
+	}
+}
