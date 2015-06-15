@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.LinkedList;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -25,14 +24,14 @@ public class MyAspect {
 	@Pointcut ("execution(* *(..))")
 	public void any_function() {}
 	
-	LinkedList<Exception> exceptionList = new LinkedList<Exception>();
+	LinkedList<Exception> exceptionList = new LinkedList<Exception>(); // list of throwed exceptions
 	
-	@Before("any_function()")
+	@Before("any_function()") // advice for testing
 	public void beforeAny_function() {
 		System.out.println("before");
 	}
 	
-	@AfterThrowing(value="any_function()", throwing="e")
+	@AfterThrowing(value="any_function()", throwing="e") // advice, which is run, when exception has been thrown
 	public void afterAny_function(JoinPoint joinPoint, RuntimeException e) {
 		try {
 			if(!alreadyThrown(e))

@@ -10,6 +10,7 @@ configurations {
         ajInpath
 }
 
+// adding plugin gradle-aspectj:1.5
 buildscript {
     repositories {
         maven {
@@ -44,12 +45,15 @@ repositories {
     
 }
 
+// adding dependencies
 dependencies {
+		// of aspectJ
  	    ajc 'org.aspectj:aspectjtools:1.7.2'
         springAspects 'org.springframework:spring-aspects:3.0.5.RELEASE'
         compile "org.aspectj:aspectjrt:1.7.2"
         compile "javax.persistence:persistence-api:1.0"
         
+        // jira and other
 	compile (
 		[group: 'commons-collections', name: 'commons-collections', version: '3.2'],
 		[group: 'com.sun.jersey', name: 'jersey-json', version: '1.5'],
@@ -63,16 +67,13 @@ dependencies {
 		[group: 'org.springframework', name: 'spring-tx', version: '3.2.3.RELEASE']
 	)
 	
+	// additional dependence to junit testing
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 compileAspect {
-	xlint= 'warning'
-	maxmem = '1024m'
-}
-
-test {
-    systemProperties 'property': 'value'
+	xlint= 'warning' //show AspectJ warnings on
+	maxmem = '1024m' // max heap size
 }
 
 uploadArchives {
@@ -81,10 +82,4 @@ uploadArchives {
            dirs 'repos'
        }
     }
-}
-
-task hello {
-	doLast {
-		println 'Hello'
-	}
 }

@@ -2,9 +2,6 @@ package org.gradle;
 
 import java.net.URI;
 import java.util.LinkedList;
-
-import org.omg.CosNaming.NamingContextPackage.AlreadyBound;
-
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
 import com.atlassian.jira.rest.client.api.domain.BasicIssue;
@@ -12,9 +9,7 @@ import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.IssueType;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInput;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
-import com.atlassian.jira.rest.client.auth.BasicHttpAuthenticationHandler;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
-import com.atlassian.util.concurrent.Promise;
 
 public aspect ExampleAspect {
 	pointcut any_function(): execution(* *(..));
