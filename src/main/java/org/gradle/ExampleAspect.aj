@@ -17,7 +17,7 @@ public aspect ExampleAspect {
 	LinkedList<Exception> exceptionList = new LinkedList<Exception>();
 	
 	before() : any_function() {
-		System.out.println("ple");
+		System.out.println("Before run method");
 	}
 	after() throwing (Exception e): any_function(){
 		//
@@ -27,7 +27,7 @@ public aspect ExampleAspect {
 			exceptionOccures(e);
 			URI jiraServerUri = new URI("https://issues.age.agh.edu.pl");
 			JiraRestClientFactory restClientFactory = new AsynchronousJiraRestClientFactory();
-			JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, "ziewiec", "Sofobega");
+			JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, "name", "password");
 			
 			Iterable<IssueType> issueTypes = restClient.getMetadataClient().getIssueTypes().claim();
 			IssueType chosenIssueType = null;

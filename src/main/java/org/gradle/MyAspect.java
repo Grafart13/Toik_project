@@ -28,7 +28,7 @@ public class MyAspect {
 	
 	@Before("any_function()") // advice for testing
 	public void beforeAny_function() {
-		System.out.println("before");
+		System.out.println("Before run a method");
 	}
 	
 	@AfterThrowing(value="any_function()", throwing="e") // advice, which is run, when exception has been thrown
@@ -39,7 +39,7 @@ public class MyAspect {
 			exceptionOccures(e);
 			URI jiraServerUri = new URI("https://issues.age.agh.edu.pl");
 			JiraRestClientFactory restClientFactory = new AsynchronousJiraRestClientFactory();
-			JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, "jarosz", "Mumeket");
+			JiraRestClient restClient = restClientFactory.createWithBasicHttpAuthentication(jiraServerUri, "name", "password");
 			
 			Iterable<IssueType> issueTypes = restClient.getMetadataClient().getIssueTypes().claim();
 			IssueType chosenIssueType = null;
